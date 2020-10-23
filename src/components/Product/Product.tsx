@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import washingMachine from './../../assets/images/washing_machine.jpg';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import {Card, CardContent, CardActions, Button, CardActionArea} from '@material-ui/core';
+import {useDispatch} from 'react-redux';
+import { setProductPriceThunk} from '../../redux/cartPageReducer';
 
 
 
@@ -20,9 +22,22 @@ export const useProductStyles = makeStyles((theme: Theme) => ({
 
 }))
 
-export const Product = () => {
+type PropsType = {
+    productPrice: number
+}
+
+export const Product = ({productPrice}: PropsType) => {
 
     const classes = useProductStyles();
+    const dispatch = useDispatch();
+
+    const [price, setProductPrice] = useState(productPrice);
+
+
+    const AddProductToCart = () => {
+        setProductPrice(  price+productPrice)
+       dispatch(setProductPriceThunk(price))
+    }
 
     return (
         <Card className={classes.card}>
@@ -36,8 +51,8 @@ export const Product = () => {
                 </div>
 
                 <div className={classes.price}>
-                    {'300$'}
-                    <Button variant={'contained'} color='primary' className={classes.button} >Add to cart</Button>
+                    {`${productPrice}$`}
+                    <Button variant={'contained'} color='primary' className={classes.button} onClick={AddProductToCart} >Add to cart</Button>
                 </div>
                 </CardActionArea>
             </CardContent>

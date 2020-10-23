@@ -1,62 +1,29 @@
 import React, {useState} from 'react';
+import {ProductItemInCart} from './ProductItemInCart/ProductItemInCart';
+import {useSelector} from 'react-redux';
+import {AppStateType} from '../../redux/store';
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import {ButtonBase, CardActionArea, CardContent, IconButton, Typography} from '@material-ui/core';
-import washingMachine from './../../assets/images/washing_machine.jpg'
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
+
 
 export const useCartStyles = makeStyles((theme: Theme) => ({
-    productImg: {
-        width: 100,
-        height: 100,
-    },
-    productInCart: {
-        maxWidth: 500,
-        margin: '25px 15px',
+    totalPrice: {
+        margin: 15,
     }
 }))
 
+
 export const Cart = () => {
-    const classes = useCartStyles();
 
-    const [countProductCart, setCountProductCart] = useState<number>(0);
+    const classes = useCartStyles()
 
-    let addOneProductCart = () => {
-        return setCountProductCart(countProductCart + 1)
-    }
-    let minusOneProductCart = () => {
-        return setCountProductCart(countProductCart - 1)
-    }
+    const totalPriceProduct = useSelector<AppStateType, number>(state => state.cartPage.totalPriceProduct)
 
     return (
-        <div className={classes.productInCart}>
-            <Paper>
-                <Grid container spacing={2} direction={'row'}>
-                    <Grid item xs={4}>
-                        <ButtonBase>
-                            <img src={washingMachine} className={classes.productImg}/>
-                        </ButtonBase>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Typography>
-                            name name name
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Typography>
-                            <IconButton onClick={addOneProductCart} >
-                                <AddIcon/>
-                            </IconButton>
-                            {countProductCart}
-                            <IconButton onClick={minusOneProductCart} >
-                                <RemoveIcon />
-                            </IconButton>
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </Paper>
+        <div>
+            <ProductItemInCart productPrice={300} />
+            <div className={classes.totalPrice}>
+                Total:  {`${totalPriceProduct}$`}
+            </div>
         </div>
     )
 }

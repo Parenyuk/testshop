@@ -7,15 +7,14 @@ import {AppBar, Button, IconButton, Toolbar} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
+import {useSelector} from 'react-redux';
+import {AppStateType} from './redux/store';
 
 export const useAppStyles = makeStyles((theme: Theme) => ({
     toolbar: {
         backgroundColor: theme.palette.primary.main,
     },
     linkButtonToHome: {
-        // backgroundColor: theme.palette.secondary.main,
-        // marginLeft: '90%',
-
         textDecoration: 'none'
     },
     linkButtonToCart: {
@@ -27,7 +26,8 @@ export const useAppStyles = makeStyles((theme: Theme) => ({
 
 function App() {
 
-    const classes = useAppStyles()
+    const classes = useAppStyles();
+    const totalPriceProduct = useSelector<AppStateType, number>(state => state.cartPage.totalPriceProduct)
 
   return (
     <div>
@@ -41,6 +41,7 @@ function App() {
                 <Link to='/cart' className={classes.linkButtonToCart} >
                     <Button >Cart </Button>
                 </Link>
+                {totalPriceProduct}
             </Toolbar>
         </AppBar>
       <Switch>
