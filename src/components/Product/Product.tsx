@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import washingMachine from './../../assets/images/washing_machine.jpg';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import {Card, CardContent, CardActions, Button, CardActionArea} from '@material-ui/core';
-import {useDispatch} from 'react-redux';
-import { setProductPriceThunk} from '../../redux/cartPageReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {setProductPriceAndCountProductThunk, setProductPriceThunk} from '../../redux/cartPageReducer';
+import {AppStateType} from '../../redux/store';
 
 
 
@@ -23,20 +24,25 @@ export const useProductStyles = makeStyles((theme: Theme) => ({
 }))
 
 type PropsType = {
-    productPrice: number
+
 }
 
-export const Product = ({productPrice}: PropsType) => {
+export const Product = () => {
 
     const classes = useProductStyles();
     const dispatch = useDispatch();
+    const totalPriceProduct = useSelector<AppStateType, number>(state => state.cartPage.totalPriceProduct);
+    const productCountInCart = useSelector<AppStateType, number>(state => state.cartPage.productCountInCart);
+    const productPrice = useSelector<AppStateType, number>(state => state.cartPage.productPrice);
 
-    const [price, setProductPrice] = useState(productPrice);
 
 
     const AddProductToCart = () => {
-        setProductPrice(  price+productPrice)
-       dispatch(setProductPriceThunk(price))
+
+        let result = totalPriceProduct + productPrice;
+
+
+        dispatch(setProductPriceAndCountProductThunk( result,productCountInCart + 1))
     }
 
     return (

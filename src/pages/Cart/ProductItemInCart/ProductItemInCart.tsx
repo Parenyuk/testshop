@@ -45,33 +45,22 @@ export const ProductItemInCart = () => {
 
     const count = totalPriceProduct / productPrice
 
-    const [countProduct, setCountProduct] = useState<number>(count);
 
 
-
-
-    // let addOneProduct = () => {
-    //     setCountProduct(countProduct + 1);
-    // }
-
-    const [totalPrice, setTotalPrice ] = useState(totalPriceProduct)
+    // const [price, setProductPrice] = useState(productPrice);
 
 
     const addOneProduct = () => {
+
         debugger
-       // dispatch(addOneProductInCart(productCountInCart + 1));
-       //  dispatch(setProductPriceThunk(productPrice, ))
-
-        setTotalPrice(totalPriceProduct+productPrice)
-
-        dispatch(setProductPriceAndCountProductThunk( totalPrice,productCountInCart + 1))
+        let result = totalPriceProduct + productPrice;
+        // setProductPrice(  price+productPrice)
+        dispatch(setProductPriceAndCountProductThunk(result,productCountInCart + 1))
 
 
     }
 
-    let minusOneProduct = () => {
-        return setCountProduct(countProduct - 1)
-    }
+
 
 
 
@@ -93,7 +82,7 @@ export const ProductItemInCart = () => {
                     </Grid>
                     <Grid item xs={4}>
                         <Typography>
-                            <IconButton onClick={minusOneProduct} disabled={countProduct === 0}>
+                            <IconButton /*onClick={minusOneProduct} disabled={countProduct === 0}*/>
                                 <RemoveIcon />
                             </IconButton>
                             {productCountInCart}

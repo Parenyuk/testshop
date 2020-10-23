@@ -22,22 +22,22 @@ export const Home = () => {
             <Container fixed>
                 <Grid container spacing={1}>
                     <Grid item  xs={4} >
-                        <Product productPrice={300} />
+                        <Product  />
                     </Grid>
                     <Grid item  xs={4} >
-                        <Product productPrice={300} />
+                        <Product  />
                     </Grid>
                     <Grid item  xs={4} >
-                        <Product productPrice={300} />
+                        <Product  />
                     </Grid>
                     <Grid item  xs={4} >
-                        <Product productPrice={300} />
+                        <Product  />
                     </Grid>
                     <Grid item  xs={4} >
-                        <Product productPrice={300} />
+                        <Product  />
                     </Grid>
                     <Grid item  xs={4} >
-                        <Product productPrice={300} />
+                        <Product  />
                     </Grid>
                 </Grid>
 
