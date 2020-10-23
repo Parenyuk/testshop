@@ -20,7 +20,7 @@ export const Cart = () => {
 
     return (
         <div>
-            <ProductItemInCart productPrice={300} />
+            <ProductItemInCart  />
             <div className={classes.totalPrice}>
                 Total:  {`${totalPriceProduct}$`}
             </div>

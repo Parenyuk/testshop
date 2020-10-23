@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useReducer} from 'react';
 import Grid from '@material-ui/core/Grid';
 import {ButtonBase, IconButton, Typography} from '@material-ui/core';
 import washingMachine from '../../../assets/images/washing_machine.jpg';
@@ -7,8 +7,14 @@ import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
 
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {AppStateType} from '../../../redux/store';
+import {
+    actions,
+    addOneProductInCart,
+    setProductPriceAndCountProductThunk,
+    setProductPriceThunk
+} from '../../../redux/cartPageReducer';
 
 
 export const useProductItemInCartStyles = makeStyles((theme: Theme) => ({
@@ -26,42 +32,48 @@ type PropsType = {
     productPrice: number
 }
 
-// function reducer(state, action) {
-//     switch (action.type) {
-//         case 'increment':
-//             return {count: state.count + 1};
-//         case 'decrement':
-//             return {count: state.count - 1};
-//         default:
-//             throw new Error();
-//     }
-// }
 
-export const ProductItemInCart = ({productPrice}: PropsType) => {
+export const ProductItemInCart = () => {
 
     const classes = useProductItemInCartStyles();
-    const totalPriceProduct = useSelector<AppStateType, number>(state => state.cartPage.totalPriceProduct)
+    const totalPriceProduct = useSelector<AppStateType, number>(state => state.cartPage.totalPriceProduct);
+    const productPrice = useSelector<AppStateType, number>(state => state.cartPage.productPrice);
+    const productCountInCart = useSelector<AppStateType, number>(state => state.cartPage.productCountInCart);
+
+    const dispatch = useDispatch();
 
 
     const count = totalPriceProduct / productPrice
 
     const [countProduct, setCountProduct] = useState<number>(count);
 
-    const [price, setProductPrice] = useState(productPrice);
 
-    let addOneProduct = () => {
-        setCountProduct(countProduct + 1);
-        setProductPrice(productPrice+price)
+
+
+    // let addOneProduct = () => {
+    //     setCountProduct(countProduct + 1);
+    // }
+
+    const [totalPrice, setTotalPrice ] = useState(totalPriceProduct)
+
+
+    const addOneProduct = () => {
+        debugger
+       // dispatch(addOneProductInCart(productCountInCart + 1));
+       //  dispatch(setProductPriceThunk(productPrice, ))
+
+        setTotalPrice(totalPriceProduct+productPrice)
+
+        dispatch(setProductPriceAndCountProductThunk( totalPrice,productCountInCart + 1))
+
 
     }
-
 
     let minusOneProduct = () => {
         return setCountProduct(countProduct - 1)
     }
 
 
-    // const [state, dispatch] = useReducer(reducer, initialState);
 
 
     return (
@@ -84,7 +96,7 @@ export const ProductItemInCart = ({productPrice}: PropsType) => {
                             <IconButton onClick={minusOneProduct} disabled={countProduct === 0}>
                                 <RemoveIcon />
                             </IconButton>
-                            {countProduct}
+                            {productCountInCart}
                             <IconButton onClick={addOneProduct}  >
                                 <AddIcon/>
                             </IconButton>
