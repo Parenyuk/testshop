@@ -33,7 +33,7 @@ export const useProductItemInCartStyles = makeStyles((theme: Theme) => ({
     },
     countBlock: {
         display: 'flex',
-       alignItems: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
     }
 }))
@@ -56,25 +56,21 @@ export const ProductItemInCart = () => {
     const count = totalPriceProduct / productPrice
 
 
-
-
     const addOneProduct = () => {
         let result = totalPriceProduct + productPrice;
-        dispatch(setProductPriceAndCountProductThunk(result,productCountInCart + 1))
+        dispatch(setProductPriceAndCountProductThunk(result, productCountInCart + 1))
     }
 
     const minusOneProduct = () => {
-        let result = totalPriceProduct -  productPrice;
-        dispatch(setProductPriceAndCountProductThunk(result,productCountInCart - 1))
+        let result = totalPriceProduct - productPrice;
+        dispatch(setProductPriceAndCountProductThunk(result, productCountInCart - 1))
     }
 
 
-
-
     return (
-        <div  className={classes.productInCart}>
+        <div className={classes.productInCart}>
             <Paper>
-                <Grid container spacing={2} direction={'row'}  >
+                <Grid container spacing={2} direction={'row'}>
                     <Grid item xs={4}>
                         <ButtonBase>
                             <img src={washingMachine} className={classes.productImg}/>
@@ -86,17 +82,17 @@ export const ProductItemInCart = () => {
                         </Typography>
                         {`${totalPriceProduct}$`}
                     </Grid>
-                    <Grid item xs={4} className={classes.countBlock} >
-                        <Typography >
+                    <Grid item xs={4} className={classes.countBlock}>
+                        <Typography>
                             <IconButton onClick={minusOneProduct}  /*disabled={countProduct === 0}*/>
-                                <RemoveIcon />
+                                <RemoveIcon/>
                             </IconButton>
                             {productCountInCart}
-                            <IconButton onClick={addOneProduct}  >
+                            <IconButton onClick={addOneProduct}>
                                 <AddIcon/>
                             </IconButton>
-                            <IconButton  className={classes.closeButton} >
-                                <CloseIcon />
+                            <IconButton className={classes.closeButton}>
+                                <CloseIcon/>
                             </IconButton>
                         </Typography>
                     </Grid>
