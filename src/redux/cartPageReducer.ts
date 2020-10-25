@@ -1,6 +1,7 @@
 import {AppStateType, InferActionTypes} from './store';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
+
 export const TOTAL_PRICE_PRODUCT = 'CART_PAGE_REDUCER/TOTOTAL_PRICE_PRODUCT';
 export const ADD_ONE_PRODUCT = 'CART_PAGE_REDUCER/ADD_ONE_PRODUCT';
 export const SET_PRODUCT_PRICE_AND_COUNT_PRODUCT = 'CART_PAGE_REDUCER/SET_PRODUCT_PRICE_AND_COUNT_PRODUCT'
@@ -81,8 +82,10 @@ export const addOneProductInCart = (productCountInCart: number):ThunkType => asy
 }
 
 export const setProductPriceAndCountProductThunk = (productPrice: number, productCountInCart: number):ThunkType => async (dispatch: ThunkDispatch<AppStateType, unknown, ActionType>, getState: () => AppStateType ) => {
+
     try {
         debugger
+
         dispatch(actions.setProductPriceAndCountProductThunk(productPrice, productCountInCart))
     }
     catch (e) {
