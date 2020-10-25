@@ -62,6 +62,7 @@ export const Product = () => {
                 </div>
                 </CardActionArea>
             </CardContent>
+
         </Card>
     )
 }

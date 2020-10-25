@@ -48,6 +48,7 @@ function App() {
           <Route exact path={'/home'} component={Home} />
           <Route path={'/cart'} component={Cart}  />
       </Switch>
+
     </div>
   );
 }
